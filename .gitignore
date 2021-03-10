@@ -1,0 +1,14 @@
+mysql/data/*
+www/wecuit/application/config/config.php
+www/wecuit/application/config/rsa/*
+www/wecuit/runtime/caches/news/*
+www/wecuit/runtime/caches/files/*
+www/wecuit/runtime/logs/*
+www/wecuit/runtime/sessions/*
+wecuit_py/gunicorn.conf.py
+www/wecuit/test/*
+www/wecuit/temp.html
+www/ssl/cuitv2/ca_bundle.crt
+www/ssl/cuitv2/certificate.crt
+www/ssl/cuitv2/private.key
+www/wecuit/public/files/user/courseTableBack/*

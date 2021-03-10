@@ -1,0 +1,56 @@
+version: "2"
+services:
+    wecuit_web:
+        build:
+            context: ./www
+            dockerfile: Dockerfile
+        container_name: wecuit_web
+        volumes:
+            - ./www:/var/www/html
+            - ./apache/php:/usr/local/etc/php/conf.d
+            - ./apache/sites-available:/etc/apache2/sites-available
+            - ./www/ssl:/etc/ssl
+        ports:
+            - "80:80"
+            - "443:443"
+        # command: >
+        #     --privileged true
+        
+        links:
+            - wecuit_py
+            - wecuit_mysql
+            - wecuit_pma
+    wecuit_mysql:
+        image: "mysql:5.7.32"
+        ports:
+            - "3307:3306"
+        restart: always
+        volumes:
+            - ./mysql/logs:/var/log/mysql
+            - ./mysql/data:/var/lib/mysql
+            # - mysql/conf:/etc/mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: ""
+        container_name: wecuit_mysql
+    wecuit_pma:
+        image: "phpmyadmin"
+        ports:
+            - "8283:80"
+        environment:
+            PMA_ARBITRARY: 1
+        container_name: wecuit_pma
+    wecuit_py:
+        image: "jiyecafe/wecuit_py"
+        # build:
+        #     context: ./wecuit_py
+        #     dockerfile: Dockerfile
+        ports:
+            - "4007:4006"
+        # volumes:
+        #     - ./wecuit_py:/vercode
+        container_name: wecuit_py
+# volumes:
+#     wecuit_py: {}
+#     mysql: {}
+#     mysql/logs: {}
+    

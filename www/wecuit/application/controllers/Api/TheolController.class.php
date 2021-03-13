@@ -1,5 +1,5 @@
 <?php
-// @Deprecated
+
 class TheolController extends BaseController
 {
     public function loginAction()
@@ -128,10 +128,17 @@ class TheolController extends BaseController
         $dirXml = $http->request($url);
         if (is_object($dirXml)) throw new Exception("服务器网络错误", 10511);
 
+        $dirXml['body'] = $this->str2UTF8($dirXml['body']);
         $this->loader->helper('theol');
         $json = json_decode(json_encode(simplexml_load_string($dirXml['body'], 'SimpleXMLElement', LIBXML_NOCDATA)), true);
-        // echo json_encode($json);
-        // exit;
+        if(false !== strpos($dirXml['body'], "http-equiv")){
+            file_put_contents(LOG_PATH . "/dirTreeAction.html", $dirXml['body']);
+            echo json_encode(array(
+                'errorCode' => 21404,
+                'errMsg' => '目录为空！'
+            ));
+            exit;
+        }
         $ret['dir'] = dirTreeHandle($json['item']);
         $ret['status'] = 2000;
         $ret['errorCode'] = 2000;

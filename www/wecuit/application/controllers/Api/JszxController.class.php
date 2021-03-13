@@ -246,8 +246,8 @@ class JszxController extends BaseController
         $html = $this->str2UTF8($html);
 
         preg_match("/>打卡时间：(.*?)<\//", $html, $time);
-        $data = checkIn_genFormData($html);
         if (false != strpos($html, "提交打卡成功！")) {
+            $data = checkIn_genFormData($html);
             echo json_encode(
                 array(
                     'errorCode' => 2000,

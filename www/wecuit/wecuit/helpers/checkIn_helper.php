@@ -13,8 +13,6 @@ function checkIn_genFormData($html)
     $xpath = new DOMXPath($dom);
 
     $title = $xpath->query('/html/body/form/div[2]/table/tbody/tr[1]/td/b');
-    if(!isset($title->item(0)->textContent))
-        $dom->saveHTMLFile('temp.html');
     $title = $title->item(0)->textContent;
 
     // 打卡时间

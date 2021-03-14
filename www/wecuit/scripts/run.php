@@ -1,12 +1,14 @@
 <?php
 chdir(__DIR__ . "/..");
 require "./wecuit/libraries/easyHttp.class.php";
+date_default_timezone_set('Asia/Shanghai');
 header("content-type:application/json");
 // print_r($_SERVER);
 $host = 'localhost';
 //$_SERVER['SERVER_ADDR']?$_SERVER['SERVER_ADDR']:gethostbyname($_SERVER['HOSTNAME']);
 
 $http = new EasyHttp();
+echo date("Y-m-d H:i:s") . "\r\n";
 try {
 
     // 自动打卡

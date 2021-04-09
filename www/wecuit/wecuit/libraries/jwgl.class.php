@@ -255,6 +255,7 @@ class JWGL
 		}
 		$sem = $body['semesters'];
 		$semester = array();
+		unset($sem['y9']);
 		foreach ($sem as $value) {
 			$semester[0][] = array(
 				'name' => $value[0]['schoolYear']
@@ -262,7 +263,7 @@ class JWGL
 			unset($value[0]['schoolYear']);
 			unset($value[1]['schoolYear']);
 			$value[0]['name'] = "第{$value[0]['name']}学期";
-			$value[1]['name'] = "第{$value[1]['name']}学期";
+			if(isset($value[1]['name']))$value[1]['name'] = "第{$value[1]['name']}学期";
 			$semester[1][] = $value;
 		}
 		if (!isset($semester[0])) {
